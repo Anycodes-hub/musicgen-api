@@ -1,8 +1,12 @@
+import os
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"  # Safe fallback if no GPU
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from audiocraft.models import MusicGen
 from audiocraft.data.audio import audio_write
-import uuid, os
+import uuid
 
 app = FastAPI()
 model = MusicGen.get_pretrained('facebook/musicgen-medium')
